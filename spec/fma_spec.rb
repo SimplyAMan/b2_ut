@@ -4,7 +4,7 @@ require 'rspec'
 require 'rubygems'
 require 'ruby-plsql'
 
-without_info = 'Інформація відсутня. Необхідно доповнити!!!'.encode("windows-1251")
+without_info = 'Інформація відсутня. Необхідно доповнити!!!'
 
 describe 'При створенні анкети ФМ задачею по завершенню дня' do
   before(:all) do
@@ -62,22 +62,22 @@ describe 'При створенні анкети ФМ задачею по зав
       @fma_contragentid = get_fma_contrag(contragentid)[:id]
     end
 
-    it 'should доп.параметр "Місце роботи"' do
-      expect(get_fma_contrag_add(@fma_contragentid, 92)[:infotext]).to eq without_info
+    it "доп.параметр 92 'Место работы и должность' має бути рівний \"#{without_info}\"" do
+      expect(get_fma_contrag_add(@fma_contragentid, 92)[:infotext]).to eq without_info.encode('windows-1251')
     end
-    it 'доп.параметр «наявність майна»' do
-      expect(get_fma_contrag_add(@fma_contragentid, 120)[:infotext]).to eq without_info
+    it "доп.параметр 120 'Наявність майна' має бути рівний '#{without_info}'" do
+      expect(get_fma_contrag_add(@fma_contragentid, 120)[:infotext]).to eq without_info.encode('windows-1251')
     end
-    it 'Рівень особистого сукупного прибутку' do
-      expect(get_fma_contrag_add(@fma_contragentid, 121)[:infotext]).to eq without_info
+    it "доп.параметр 121 'Рівень особистого сукупного щомісячного прибутку' має бути рівний '#{without_info}'" do
+      expect(get_fma_contrag_add(@fma_contragentid, 121)[:infotext]).to eq without_info.encode('windows-1251')
     end
-    it 'История обслуживания клиента' do
-      expect(get_fma_contrag_add(@fma_contragentid, 65)[:infotext]).to eq without_info
+    it "доп.параметр 65 'История обслуживания клиента' має бути рівний '#{without_info}'" do
+      expect(get_fma_contrag_add(@fma_contragentid, 65)[:infotext]).to eq without_info.encode('windows-1251')
     end
-    it 'доп.параметр 64 "Банковские услуги" має бути рівний "Розрахунково-касове обслуговування"' do
-      expect(get_fma_contrag_add(@fma_contragentid, 64)[:infotext]).no_to eq 'Розрахунково-касове обслуговування'.encode('windows-1251')
+    it "доп.параметр 64 'Банковские услуги' має бути рівний 'Розрахунково-касове обслуговування'" do
+      expect(get_fma_contrag_add(@fma_contragentid, 64)[:infotext]).to eq 'Розрахунково-касове обслуговування'.encode('windows-1251')
     end
-    it 'доп.параметр "Характеристика источников средств"' do
+    it "доп.параметр 66 'Источники поступлений средств и других ценностей' має бути рівний 'Дохід, Власні заощадження'" do
       expect(get_fma_contrag_add(@fma_contragentid, 66)[:infotext]).to eq 'Дохід, Власні заощадження'.encode('windows-1251')
     end
 end
